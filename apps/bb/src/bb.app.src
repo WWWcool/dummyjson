@@ -1,0 +1,20 @@
+{application, bb, [
+    {description, "An OTP application"},
+    {vsn, "0.1.0"},
+    {registered, []},
+    {mod, {bb_app, []}},
+    {applications, [
+        kernel,
+        stdlib,
+        ssl,
+        ranch,
+        cowlib,
+        cowboy,
+        gun,
+        jsx
+    ]},
+    {env, []},
+    {modules, []},
+    {licenses, ["Apache-2.0"]},
+    {links, []}
+ ]}.

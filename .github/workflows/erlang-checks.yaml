@@ -1,0 +1,29 @@
+# CI Erlang (reusable: valitydev/erlang-workflows erlang-parallel-build).
+# Параллельные джобы:
+#   • Build — зависимости, rebar3 compile, кэш _build.
+#   • Check — rebar3 fmt -c, rebar3 lint (elvis), rebar3 xref.
+#   • Dialyze — rebar3 as test dialyzer.
+#   • Test — rebar3 eunit --cover, rebar3 ct --cover (без Docker Compose).
+# upload-coverage: false — шаги codecov/covertool/lcov не выполняются.
+name: Erlang CI Checks
+
+on:
+  push:
+    branches:
+      - 'master'
+      - 'epic/**'
+  pull_request:
+    branches: ['**']
+
+jobs:
+  run:
+    name: Run checks
+    uses: valitydev/erlang-workflows/.github/workflows/erlang-parallel-build.yml@v1.0.18
+    with:
+      otp-version: '27.3.4'
+      rebar-version: '3.24'
+      use-thrift: false
+      run-ct-with-compose: false
+      use-coveralls: true
+      cache-version: v9
+      upload-coverage: false
